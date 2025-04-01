@@ -43,7 +43,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative p-3 bg-gray-900 text-white">
+    <section className="relative pt-10 pb-5 h-[60vh] bg-gray-900 text-white">
       {/* Background Images */}
       {backgroundImages.map((image, index) => (
         <div

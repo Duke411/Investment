@@ -36,31 +36,31 @@ const Navbar = () => {
       <header className="bg-gray-800 shadow-md fixed w-full top-0 z-50 font-['Roboto']">
         <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
           {/* Logo */}
-          <h1 className="text-2xl font-bold text-white">Tradehub</h1>
+          <Link to="/" className="text-2xl font-bold text-white">Tradehub</Link>
 
           {/* Desktop Menu */}
           <ul className="hidden md:flex space-x-6 items-center">
-            <li className="text-white hover:text-blue-400 transition-colors duration-300">Home</li>
-            <li className="text-white hover:text-blue-400 transition-colors duration-300">About Us</li>
-            <li className="text-white hover:text-blue-400 transition-colors duration-300">Plan</li>
-            <li className="text-white hover:text-blue-400 transition-colors duration-300">FAQs</li>
-            <li className="text-white hover:text-blue-400 transition-colors duration-300">Contact</li>
-            <li className="text-white hover:text-blue-400 transition-colors duration-300">
+            <Link to="/" className="text-white hover:text-blue-400 transition-colors duration-300">Home</Link>
+            <a href="#about" className="text-white hover:text-blue-400 transition-colors duration-300">About Us</a>
+            <a href="#plan" className="text-white hover:text-blue-400 transition-colors duration-300">Plan</a>
+            <a href='#faqs' className="text-white hover:text-blue-400 transition-colors duration-300">FAQs</a>
+            <Link className="text-white hover:text-blue-400 transition-colors duration-300">Contact</Link>
+            <Link to="/login" className="text-white hover:text-blue-400 transition-colors duration-300">
               <button className="flex items-center space-x-1 bg-blue-600 px-4 py-2 rounded-md hover:bg-blue-700 transition-colors duration-300">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
                 </svg>
                 <span>Log In</span>
               </button>
-            </li>
-            <li className="ml-2">
+            </Link>
+            <Link to="/signup" className="ml-2">
               <button className="flex items-center space-x-1 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors duration-300">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                   <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z" />
                 </svg>
                 <span>Sign Up</span>
               </button>
-            </li>
+            </Link>
           </ul>
 
           {/* Mobile Menu Button */}
@@ -95,7 +95,7 @@ const Navbar = () => {
             }`}
           >
             <div className="p-4 flex justify-between items-center border-b border-gray-700">
-              <h1 className="text-xl font-bold text-white">Tradehub</h1>
+              <Link to="/" className="text-xl font-bold text-white">Tradehub</Link>
               <button 
                 className="text-2xl text-white focus:outline-none" 
                 onClick={toggleMenu}
@@ -105,27 +105,27 @@ const Navbar = () => {
               </button>
             </div>
             <ul className="p-4 flex flex-col space-y-4">
-              <li className="py-2 border-b border-gray-700 text-white hover:text-blue-400 transition-colors duration-300">Home</li>
-              <li className="py-2 border-b border-gray-700 text-white hover:text-blue-400 transition-colors duration-300">About Us</li>
-              <li className="py-2 border-b border-gray-700 text-white hover:text-blue-400 transition-colors duration-300">Plan</li>
-              <li className="py-2 border-b border-gray-700 text-white hover:text-blue-400 transition-colors duration-300">FAQs</li>
+              <Link to="/" className="py-2 border-b border-gray-700 text-white hover:text-blue-400 transition-colors duration-300">Home</Link>
+              <a href='#about' className="py-2 border-b border-gray-700 text-white hover:text-blue-400 transition-colors duration-300">About Us</a>
+              <a href="#plan" className="py-2 border-b border-gray-700 text-white hover:text-blue-400 transition-colors duration-300">Plan</a>
+              <a href="#faqs" className="py-2 border-b border-gray-700 text-white hover:text-blue-400 transition-colors duration-300">FAQs</a>
               <li className="py-2 border-b border-gray-700 text-white hover:text-blue-400 transition-colors duration-300">Contact</li>
-              <li className="py-2 border-b border-gray-700 text-white hover:text-blue-400 transition-colors duration-300">
+              <Link to="/login" className="py-2 border-b border-gray-700 text-white hover:text-blue-400 transition-colors duration-300">
                 <button className="flex items-center space-x-2 w-full">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
                   </svg>
                   <span>Log In</span>
                 </button>
-              </li>
-              <li className="mt-4">
+              </Link>
+              <Link to="/signup" className="mt-4">
                 <button className="flex items-center justify-center space-x-2 w-full bg-blue-600 text-white py-2 px-4 rounded-md text-center hover:bg-blue-700 transition-colors duration-300">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z" />
                   </svg>
                   <span>Sign Up</span>
                 </button>
-              </li>
+              </Link>
             </ul>
           </div>
         </nav>
