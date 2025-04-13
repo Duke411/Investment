@@ -11,6 +11,7 @@ import Profile from './Dashboard/Profile'
 import Transfer from './components/Transfer'
 import Fundaccount from './components/Fundaccount'
 import Recieve from './components/Recieve'
+import Admin from './Dashboard/Admin'
 
 
 
@@ -29,6 +30,7 @@ const App = () => {
         <Route path="Transfer" element={<Transfer/>}/>
         <Route path="Fundaccount" element={<Fundaccount/>}/>
         <Route path="Recieve" element={<Recieve/>}/>
+        <Route path="admin" element={<Admin/>}/>
 
       </Routes>
     </BrowserRouter>
