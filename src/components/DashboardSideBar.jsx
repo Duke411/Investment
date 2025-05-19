@@ -2,9 +2,31 @@ import React from 'react';
 import { CiUser } from 'react-icons/ci';
 import { MdHome, MdLogout, MdSettings, MdOutlineArrowBackIosNew, MdOutlineArrowForwardIos } from 'react-icons/md';
 import { FaMoneyCheckAlt } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { logout } from '../slices/authSlice';
+import { toast } from 'react-toastify';
 
 const DashboardSideBar = ({ isOpen, setIsOpen }) => {
+  // Setup for logout functionality
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // Logout handler function - client-side only since there's no logout API
+  const handleLogout = () => {
+    // Clear the JWT cookie
+    document.cookie = "jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    
+    // Dispatch Redux logout action to clear state
+    dispatch(logout());
+    
+    // Show success message
+    toast.success('Logged out successfully');
+    
+    // Redirect to login page
+    navigate('/login');
+  };
+
   return (
     <>
       {/* Dark overlay behind sidebar */}
@@ -31,7 +53,7 @@ const DashboardSideBar = ({ isOpen, setIsOpen }) => {
               </div>
               <h2 className="mt-2 text-sm font-semibold">Welcome</h2>
             </div>
-
+            
             <nav className="mt-6">
               <ul className="flex flex-col gap-2 px-4">
                 <li className="flex items-center gap-3 p-3 rounded-md hover:bg-blue-800 cursor-pointer transition">
@@ -40,11 +62,11 @@ const DashboardSideBar = ({ isOpen, setIsOpen }) => {
                 </li>
                 <li className="flex items-center gap-3 p-3 rounded-md hover:bg-blue-800 cursor-pointer transition">
                   <FaMoneyCheckAlt size={20} />
-                  <Link to='/loan'>Loan</Link>
+                  <Link to='/dashboard/loan'>Loan</Link>
                 </li>
                 <li className="flex items-center gap-3 p-3 rounded-md hover:bg-blue-800 cursor-pointer transition">
                   <MdSettings size={20} />
-                  <Link to="/Settings">Settings</Link>
+                  <Link to="/dashboard/settings">Settings</Link>
                 </li>
               </ul>
             </nav>
@@ -52,11 +74,14 @@ const DashboardSideBar = ({ isOpen, setIsOpen }) => {
 
           {/* Bottom: Logout and Toggle */}
           <div className="px-4 py-6 flex flex-col gap-4 relative bottom-20">
-            <div className="flex items-center gap-3 p-3 rounded-md hover:bg-red-700 bg-red-600 cursor-pointer transition">
+            <button
+              onClick={handleLogout}
+              className="flex items-center gap-3 p-3 rounded-md hover:bg-red-700 bg-red-600 cursor-pointer transition w-full text-left"
+            >
               <MdLogout size={20} />
               <span>Logout</span>
-            </div>
-
+            </button>
+            
             {/* Toggle Button (on sidebar edge) */}
             <button
               onClick={() => setIsOpen(!isOpen)}

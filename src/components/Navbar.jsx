@@ -133,7 +133,7 @@ const Navbar = () => {
       </header>
       
       {/* Add spacing to prevent content from being hidden behind fixed navbar */}
-      <div className="pt-16"></div>
+      <div className="pt-6"></div>
     </>
   );
 };

@@ -1,24 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLoginMutation } from '../slices/userApiSlice';
+import { setCredentials } from '../slices/authSlice';
 import Navbar from '../components/Navbar';
 
 const LoginPage = () => {
   const controls = useAnimation();
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
   const navigate = useNavigate();
-  
+  const dispatch = useDispatch();
+
+  const [login, { isLoading }] = useLoginMutation();
+  const { userInfo } = useSelector((state) => state.auth);
+
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
-  const [isLoading, setIsLoading] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
+    if (userInfo) {
+      // Check user role for initial navigation
+      if (userInfo.data && userInfo.data.user && userInfo.data.user.role === 'admin') {
+        navigate('/admin');
+      } else {
+        navigate('/dashboard');
+      }
+    }
+  }, [userInfo, navigate]);
+
+  useEffect(() => {
     if (inView) controls.start({ opacity: 1, y: 0 });
   }, [inView, controls]);
 
@@ -37,36 +53,22 @@ const LoginPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
     
     try {
-      // Replace with your actual API endpoint
-      const response = await axios.post('http://localhost:8080/invest/api/v1/login', formData);
-      console.log(response.data.data.user.role)
+      const res = await login(formData).unwrap();
+      dispatch(setCredentials({...res}));
       toast.success('Login successful!');
       
       // Check user role and redirect accordingly
-      if (response.data.data.user.role === 'admin') {
+      if (res.data && res.data.user && res.data.user.role === 'admin') {
         navigate('/admin');
       } else {
         navigate('/dashboard');
       }
-    } catch (error) {
-      // Handle different types of errors
-      if (error.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
-        toast.error(error.response.data.message || 'Login failed');
-      } else if (error.request) {
-        // The request was made but no response was received
-        toast.error('No response from server. Please try again.');
-      } else {
-        // Something happened in setting up the request that triggered an Error
-        toast.error('An error occurred. Please try again.');
-      }
-      console.error('Login error:', error);
-    } finally {
-      setIsLoading(false);
+    } catch (err) {
+      const errorMessage = err?.data?.message || err.error || 'Login failed';
+      toast.error(errorMessage);
+      console.error('Login error:', errorMessage);
     }
   };
 

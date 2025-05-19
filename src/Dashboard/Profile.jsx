@@ -1,39 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import DashboardNavbar from '../components/DashboardNavbar';
 import DashboardSideBar from '../components/DashboardSideBar';
 
 const Profile = () => {
-  // Dummy data
-  const [userData, setUserData] = useState({
-    fullName: 'Emmanuel Johnson',
-    accountBalance: '12,345.67 USD',
-    totalInvestment: '150,000.00 USD',
-    totalWithdraw: '45,000.00 USD',
-    accountId: 'AB1234567890XYZ'
-  });
+  const { userInfo } = useSelector((state) => state.auth);
+  const fullName = userInfo?.data?.user?.fullName || 'User';
+  const accountBalance = userInfo?.data?.user?.accountBalance || 0;
+  const totalInvestment = userInfo?.data?.user?.totalInvestment || 0;
+  const totalProfit = userInfo?.data?.user?.totalProfit || 0;
+  const totalLoss = userInfo?.data?.user?.totalLoss || 0;
+  const accountId = userInfo?.data?.user?.accountId || 'N/A';
 
-  // Simulate data fetching
-  useEffect(() => {
-    // You can remove this useEffect block if you're fetching data from an API
-    const fetchUserData = async () => {
-      try {
-        // Simulate API call
-        setTimeout(() => {
-          setUserData({
-            fullName: 'Emmanuel Johnson',
-            accountBalance: '12,345.67 USD',
-            totalInvestment: '150,000.00 USD',
-            totalWithdraw: '45,000.00 USD',
-            accountId: 'AB1234567890XYZ'
-          });
-        }, 1000);
-      } catch (err) {
-        console.error('Failed to fetch user data:', err);
-      }
-    };
-
-    fetchUserData();
-  }, []);
+  const userData = {
+    fullName,
+    accountBalance: `$${accountBalance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USD`,
+    totalInvestment: `$${totalInvestment.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USD`,
+    totalProfit: `$${totalProfit.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USD`,
+    totalLoss: `$${totalLoss.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USD`,
+    accountId
+  };
 
   return (
     <div className='bg-gray-100 min-h-screen'>
@@ -45,7 +31,6 @@ const Profile = () => {
             Profile Information
           </h2>
 
-          {/* User Information Display */}
           <div className='space-y-6'>
             <div className='flex justify-between bg-gray-50 p-4 rounded-lg'>
               <span className='font-medium text-gray-700 text-lg'>Full Name:</span>
@@ -63,8 +48,13 @@ const Profile = () => {
             </div>
 
             <div className='flex justify-between bg-gray-50 p-4 rounded-lg'>
-              <span className='font-medium text-gray-700 text-lg'>Total Withdraw:</span>
-              <span className='text-gray-900 text-lg'>{userData.totalWithdraw}</span>
+              <span className='font-medium text-gray-700 text-lg'>Total Profit:</span>
+              <span className='text-gray-900 text-lg'>{userData.totalProfit}</span>
+            </div>
+
+            <div className='flex justify-between bg-gray-50 p-4 rounded-lg'>
+              <span className='font-medium text-gray-700 text-lg'>Total Loss:</span>
+              <span className='text-gray-900 text-lg'>{userData.totalLoss}</span>
             </div>
 
             <div className='flex justify-between bg-gray-50 p-4 rounded-lg'>
