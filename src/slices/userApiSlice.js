@@ -58,54 +58,54 @@
 //   useDeleteUserMutation,
 // } = usersApiSlice;
 
-import { apiSlice } from './apiSlice';
-const USERS_URL = '/invest/api/v1'; // Adjust based on your API base URL
+import { apiSlice } from "./apiSlice";
+const USERS_URL = "/invest/api/v1"; // Adjust based on your API base URL
 
 export const userApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     register: builder.mutation({
       query: (data) => ({
         url: `${USERS_URL}/signup`,
-        method: 'POST',
+        method: "POST",
         body: data,
       }),
     }),
     login: builder.mutation({
       query: (data) => ({
         url: `${USERS_URL}/login`,
-        method: 'POST',
+        method: "POST",
         body: data,
       }),
     }),
     logout: builder.mutation({
       query: () => ({
         url: `${USERS_URL}/logout`,
-        method: 'POST',
+        method: "POST",
       }),
     }),
     getAllUsers: builder.query({
       query: () => ({
-        url: `${USERS_URL}/`,
-        method: 'GET',
+        url: `${USERS_URL}/users`,
+        method: "GET",
       }),
     }),
     updateUserProfile: builder.mutation({
       query: ({ userId, ...data }) => ({
         url: `${USERS_URL}/users/${userId}`,
-        method: 'PUT',
+        method: "PUT",
         body: data,
       }),
     }),
     deleteUser: builder.mutation({
       query: (userId) => ({
         url: `${USERS_URL}/users/${userId}`,
-        method: 'DELETE',
+        method: "DELETE",
       }),
     }),
     creditReferrer: builder.mutation({
       query: (data) => ({
         url: `${USERS_URL}/credit-referrer`,
-        method: 'POST',
+        method: "POST",
         body: data,
       }),
     }),
