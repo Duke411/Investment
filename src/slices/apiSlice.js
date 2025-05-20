@@ -1,8 +1,8 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const baseQuery = fetchBaseQuery({ 
-  baseUrl: 'http://localhost:8080',
-  credentials: 'include',
+const baseQuery = fetchBaseQuery({
+  baseUrl: "https://investmentbackend-rnne.onrender.com",
+  credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     return headers;
   },
@@ -10,6 +10,6 @@ const baseQuery = fetchBaseQuery({
 
 export const apiSlice = createApi({
   baseQuery,
-  tagTypes: ['User'],
+  tagTypes: ["User"],
   endpoints: (builder) => ({}),
 });

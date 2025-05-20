@@ -47,7 +47,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative pt-10 pb-5 h-[60vh] bg-gray-900 text-white">
+    <section className="relative pt-10 pb-5  bg-gray-900 text-white text-center">
       {/* Background Images */}
       {backgroundImages.map((image, index) => (
         <div
@@ -68,7 +68,7 @@ const HeroSection = () => {
       {/* Content */}
       <div className="relative z-10 flex items-center justify-center h-full px-4 sm:px-6">
         <div className="max-w-4xl mx-auto text-left md:text-center space-y-6">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight animate-fade-in-down">
+          <h1 className="text-4xl sm:text-2xl md:text-6xl font-bold leading-tight animate-fade-in-down">
             At The Forefront of Trading And Investment
           </h1>
           <p className="text-lg sm:text-xl md:text-2xl font-light max-w-3xl mx-auto animate-fade-in-up">
@@ -79,7 +79,7 @@ const HeroSection = () => {
           </p>
           <Link to="/login">
             <button
-              className="group relative inline-flex items-center justify-center px-8 py-3 text-lg font-medium text-white bg-gray-900 rounded-md transition-all duration-300 ease-out hover:bg-gray-800 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400 overflow-hidden animate-fade-in"
+              className="group relative inline-flex items-center justify-center px-5 py-3 text-lg font-medium text-white bg-gray-900 rounded-md transition-all duration-300 ease-out hover:bg-gray-800 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400 overflow-hidden animate-fade-in"
               onClick={handleButtonClick}
             >
               <span className="relative z-10">Get Started</span>
